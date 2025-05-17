@@ -1,0 +1,11 @@
+com\example\servlet\controller\LoginController.class
+com\example\food\JakartaRestConfiguration.class
+com\example\servlet\controller\ProfileController.class
+com\example\servlet\controller\RegisterController.class
+com\example\food\resources\JakartaEE10Resource.class
+com\example\servlet\controller\LogoutController.class
+com\example\servlet\controller\ForgotPasswordController.class
+com\example\servlet\controller\HomeController.class
+com\example\servlet\utils\DBConnect.class
+com\example\servlet\dao\UserDAO.class
+com\example\servlet\model\User.class
