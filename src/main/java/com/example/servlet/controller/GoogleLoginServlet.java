@@ -31,7 +31,7 @@ public class GoogleLoginServlet extends HttpServlet {
         String code = req.getParameter("code");
         if (code != null) {
             String tokenUrl = "https://oauth2.googleapis.com/token";
-            String tokenParams = "code=" + code + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&redirect_uri=" + REDIRECT_URI + "&grant_type=authorization_code";
+            String tokenParams = "code=" + code + "&client_id=" + clientId + "&client_secret=" + clientSecret + "&redirect_uri=" + REDIRECT_URI + "&grant_type=authorization_code";
             String tokenResponse = Request.Post(tokenUrl).bodyString(tokenParams, null).execute().returnContent().asString();
 
             Gson gson = new Gson();
