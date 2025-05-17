@@ -69,10 +69,10 @@
     </form>
     <div class="social-login text-center mt-4">
         <p>Or login with:</p>
-        <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/Home&response_type=code&client_id=543378430539-glm8gq8ag8cmt52ef2qmom1t6d2qncdb.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google w-100 mb-2">
+        <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=https://abc123.ngrok.io/GoogleLoginServlet&response_type=code&client_id=595131855100-pe7h7bnm3ukanad9uu8027st616rb6ei.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google w-100 mb-2">
             <i class="fab fa-google"></i> Sign in with Google
         </a>
-        <a href="https://github.com/login/oauth/authorize?client_id=Ov23liuSOh1flCRd73X2&redirect_uri=http://localhost:8080/Home&scope=user:email" class="btn btn-github w-100">
+        <a href="https://github.com/login/oauth/authorize?client_id=Ov23li5L7N0QU8WL62FR&redirect_uri=https://abc123.ngrok.io/GitHubLoginServlet&scope=user:email" class="btn btn-github w-100">
             <i class="fab fa-github"></i> Sign in with GitHub
         </a>
     </div>

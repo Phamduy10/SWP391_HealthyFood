@@ -14,11 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GoogleLoginServlet extends HttpServlet {
-
+    
     String clientId = System.getenv("GOOGLE_CLIENT_ID");
     String clientSecret = System.getenv("GOOGLE_CLIENT_SECRET");
-
-    private static final String REDIRECT_URI = "http://localhost:8080/Home";
+    private static final String REDIRECT_URI = "https://abc123.ngrok.io/GoogleLoginServlet";
     private UserDAO userDAO;
 
     @Override
@@ -64,7 +63,7 @@ public class GoogleLoginServlet extends HttpServlet {
             }
 
             req.getSession().setAttribute("user", user);
-            resp.sendRedirect("home.jsp");
+            resp.sendRedirect("profile");
         }
     }
 

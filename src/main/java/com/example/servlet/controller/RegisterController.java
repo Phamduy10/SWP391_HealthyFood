@@ -41,6 +41,7 @@ public class RegisterController extends HttpServlet {
         user.setEmail(email);
         user.setPhone(phone);
         user.setGender(gender);
+        user.setRole("USER");
         user.setBirthDate(birthDateStr != null && !birthDateStr.isEmpty() ? Date.valueOf(birthDateStr) : null);
 
         try {
