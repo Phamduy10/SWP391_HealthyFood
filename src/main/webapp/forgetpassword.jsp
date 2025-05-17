@@ -30,7 +30,7 @@
     <c:if test="${not empty success}">
         <div class="alert alert-success" role="alert">${success}</div>
     </c:if>
-    <form action="forgotPassword" method="post">
+    <form action="ForgotPasswordController" method="post">
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" required>

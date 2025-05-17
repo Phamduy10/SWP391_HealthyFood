@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
@@ -18,6 +19,31 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .social-login .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .btn-google {
+            background-color: #ffffff;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+        .btn-google:hover {
+            background-color: #f1f1f1;
+        }
+        .btn-github {
+            background-color: #24292e;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-github:hover {
+            background-color: #1a1e22;
         }
     </style>
 </head>
@@ -41,8 +67,20 @@
         </div>
         <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
+    <div class="social-login text-center mt-4">
+        <p>Or login with:</p>
+        <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/Home&response_type=code&client_id=543378430539-glm8gq8ag8cmt52ef2qmom1t6d2qncdb.apps.googleusercontent.com&approval_prompt=force" class="btn btn-google w-100 mb-2">
+            <i class="fab fa-google"></i> Sign in with Google
+        </a>
+        <a href="https://github.com/login/oauth/authorize?client_id=Ov23liuSOh1flCRd73X2&redirect_uri=http://localhost:8080/Home&scope=user:email" class="btn btn-github w-100">
+            <i class="fab fa-github"></i> Sign in with GitHub
+        </a>
+    </div>
     <p class="text-center mt-3">
         Don't have an account? <a href="register.jsp">Register</a>
+    </p>
+    <p class="text-center mt-3">
+        Forget your password? <a href="forgetpassword.jsp">Forget Password</a>
     </p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

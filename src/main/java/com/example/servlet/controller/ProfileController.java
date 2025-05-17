@@ -40,7 +40,7 @@ public class ProfileController extends HttpServlet {
         String gender = request.getParameter("gender");
         String birthDateStr = request.getParameter("birthDate");
 
-        user.setFullName(fullName);
+        user.setName(fullName);
         user.setEmail(email);
         user.setPhone(phone);
         user.setGender(gender);

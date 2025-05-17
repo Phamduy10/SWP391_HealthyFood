@@ -36,8 +36,8 @@ public class RegisterController extends HttpServlet {
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password); // Nên mã hóa mật khẩu
-        user.setFullName(fullName);
+        user.setPass(password); // Nên mã hóa mật khẩu
+        user.setName(fullName);
         user.setEmail(email);
         user.setPhone(phone);
         user.setGender(gender);
