@@ -14,8 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GoogleLoginServlet extends HttpServlet {
-    private static final String CLIENT_ID = "543378430539-glm8gq8ag8cmt52ef2qmom1t6d2qncdb.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
+
+    String clientId = System.getenv("GOOGLE_CLIENT_ID");
+    String clientSecret = System.getenv("GOOGLE_CLIENT_SECRET");
+
     private static final String REDIRECT_URI = "http://localhost:8080/Home";
     private UserDAO userDAO;
 
@@ -47,7 +49,7 @@ public class GoogleLoginServlet extends HttpServlet {
             if (user == null) {
                 user = new User();
                 user.setUsername(userInfo.email);
-                user.setFullName(userInfo.name);
+                user.setName(userInfo.name);
                 user.setEmail(userInfo.email);
                 try {
                     userDAO.registerUser(user);
@@ -56,7 +58,7 @@ public class GoogleLoginServlet extends HttpServlet {
                 }
                 try {
                     user = userDAO.findByEmail(userInfo.email); // Lấy lại user để có ID
-                }catch (SQLException ex) {
+                } catch (SQLException ex) {
                     Logger.getLogger(GoogleLoginServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -67,10 +69,12 @@ public class GoogleLoginServlet extends HttpServlet {
     }
 
     private static class TokenResponse {
+
         String access_token;
     }
 
     private static class UserInfo {
+
         String email;
         String name;
     }
