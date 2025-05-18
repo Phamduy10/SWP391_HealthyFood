@@ -1,0 +1,55 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 18, 2025, 6:52:53 PM
+    Author     : Admin
+*/
+
+    body {
+      padding-top: 70px; /* To avoid content being hidden behind fixed navbar */
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .navbar {
+      background-color: #6db072 !important;
+    }
+
+    .navbar-brand img {
+      height: 36px;
+    }
+
+    .nav-link {
+      color: #3c6e47 !important;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: #2b4e33 !important;
+    }
+
+    .badge-notification {
+      font-size: 0.7rem;
+      padding: 0.4em 0.6em;
+    }
+
+    .btn-success {
+      background-color: #6db072;
+      border: none;
+    }
+
+    .btn-success:hover {
+      background-color: #59985f;
+    }
+   
+    /* Mobile nav spacing */
+    @media (max-width: 991.98px) {
+      .navbar-collapse {
+        background-color: #f8fdf6;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+      }
+    }
+
