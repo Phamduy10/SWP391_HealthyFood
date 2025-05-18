@@ -1,8 +1,3 @@
-<%-- 
-    Document   : DaskbashNutrif
-    Created on : May 18, 2025, 5:02:44 PM
-    Author     : Admin
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
