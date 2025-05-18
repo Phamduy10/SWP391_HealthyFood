@@ -20,6 +20,7 @@ import org.apache.http.util.EntityUtils;
 
 public class GoogleLoginServlet extends HttpServlet {
 
+
     String clientId = "";
     String clientSecret = "";
     private static final String REDIRECT_URI = "http://localhost:8080/GoogleLoginServlet";
