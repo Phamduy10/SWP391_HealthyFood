@@ -7,8 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UserDAO {
+
     public void registerUser(User user) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
@@ -31,30 +33,35 @@ public class UserDAO {
         }
     }
 
-    public User loginUser(String username, String pass) throws SQLException {
+    public User loginUser(String username, String password) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
         try {
-            String sql = "SELECT * FROM Users WHERE username = ? AND pass = ?";
+            String sql = "SELECT * FROM Users WHERE username = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
-            stmt.setString(2, pass);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return new User(
-                    rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("pass"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("phone"),
-                    rs.getString("gender"),
-                    rs.getDate("birthDate"),
-                    rs.getString("role"),
-                    rs.getString("status"),
-                    rs.getString("image"),
-                    rs.getTimestamp("create_at")
-                );
+                String hashedPassword = rs.getString("pass");
+                // Kiểm tra mật khẩu bằng BCrypt123 = >abc   abc 
+                // register 123 => abc (DB)
+                // userName:admin
+                if (BCrypt.checkpw(password, hashedPassword)) {
+                    return new User(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            hashedPassword, // Lưu ý: Có thể không cần lưu mật khẩu
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("phone"),
+                            rs.getString("gender"),
+                            rs.getDate("birthDate"),
+                            rs.getString("role"),
+                            rs.getString("status"),
+                            rs.getString("image"),
+                            rs.getTimestamp("create_at")
+                    );
+                }
             }
             return null;
         } finally {
@@ -121,18 +128,18 @@ public class UserDAO {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new User(
-                    rs.getInt("id"),
-                    rs.getString("username"),
-                    rs.getString("pass"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("phone"),
-                    rs.getString("gender"),
-                    rs.getDate("birthDate"),
-                    rs.getString("role"),
-                    rs.getString("status"),
-                    rs.getString("image"),
-                    rs.getTimestamp("create_at")
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("pass"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("gender"),
+                        rs.getDate("birthDate"),
+                        rs.getString("role"),
+                        rs.getString("status"),
+                        rs.getString("image"),
+                        rs.getTimestamp("create_at")
                 );
             }
             return null;

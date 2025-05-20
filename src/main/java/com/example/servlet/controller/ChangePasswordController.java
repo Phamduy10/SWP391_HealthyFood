@@ -10,9 +10,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/changePassword")
 public class ChangePasswordController extends HttpServlet {
+
     private UserDAO userDAO;
 
     @Override
@@ -51,8 +53,10 @@ public class ChangePasswordController extends HttpServlet {
                 return;
             }
 
+            String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
             // Update password
-            userDAO.updatePassword(user.getEmail(), newPassword);
+            userDAO.updatePassword(user.getEmail(), hashedPassword);
             user.setPass(newPassword);
             session.setAttribute("user", user);
             response.sendRedirect("profile.jsp?success=Password changed successfully");
