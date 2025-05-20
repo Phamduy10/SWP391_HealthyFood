@@ -8,7 +8,6 @@
         <servlet-name>GitHubLoginServlet</servlet-name>
         <servlet-class>com.example.servlet.controller.GitHubLoginServlet</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>GoogleLoginServlet</servlet-name>
         <url-pattern>/GoogleLoginServlet</url-pattern>
@@ -21,7 +20,6 @@
         <servlet-name>ResetPasswordController</servlet-name>
         <url-pattern>/ResetPasswordController</url-pattern>
     </servlet-mapping>
-   
     <session-config>
         <session-timeout>
             30
