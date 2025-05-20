@@ -2,7 +2,6 @@ package com.example.servlet.dao;
 
 import com.example.servlet.model.User;
 import com.example.servlet.utils.DBConnect;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
