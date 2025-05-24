@@ -13,5 +13,17 @@ import java.sql.SQLException;
  * @author Admin
  */
 public class NutritionistDAO {
+    public void getAllBlogs () throws SQLException{
+        DBConnect dbConnect = new DBConnect();
+        Connection conn = dbConnect.getConnection();
+        String sql = "INSERT INTO Users (username, pass, name, email, phone, gender, birthDate, role, status, image, create_at) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, GETDATE())";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            
+            ps.executeUpdate();
+        } finally {
+            dbConnect.closeConnection();
+        }
+    }
     
 }
