@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
@@ -36,7 +37,8 @@ public class RegisterController extends HttpServlet {
 
         User user = new User();
         user.setUsername(username);
-        user.setPass(password); // Nên mã hóa mật khẩu
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        user.setPass(hashedPassword);
         user.setName(fullName);
         user.setEmail(email);
         user.setPhone(phone);

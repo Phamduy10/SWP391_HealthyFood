@@ -6,15 +6,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UserDAO {
 
     public void registerUser(User user) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
-        String sql = "INSERT INTO Users (username, pass, name, email, phone, gender, birthDate, role, status, image, create_at) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, GETDATE())";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            String sql = "INSERT INTO Users (username, pass, name, email, phone, gender, birthDate, role, status, image, create_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, GETDATE())";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPass());
             stmt.setString(3, user.getName());
@@ -31,46 +33,51 @@ public class UserDAO {
         }
     }
 
-    public User loginUser(String username, String pass) throws SQLException {
+    public User loginUser(String username, String password) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
-        String sql = "SELECT * FROM Users WHERE username = ? AND pass = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            String sql = "SELECT * FROM Users WHERE username = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
-            stmt.setString(2, pass);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String hashedPassword = rs.getString("pass");
+                // Kiểm tra mật khẩu bằng BCrypt123 = >abc   abc 
+                // register 123 => abc (DB)
+                // userName:admin
+                if (BCrypt.checkpw(password, hashedPassword)) {
                     return new User(
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("pass"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("phone"),
-                        rs.getString("gender"),
-                        rs.getDate("birthDate"),
-                        rs.getString("role"),
-                        rs.getString("status"),
-                        rs.getString("image"),
-                        rs.getTimestamp("create_at")
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            hashedPassword, // Lưu ý: Có thể không cần lưu mật khẩu
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("phone"),
+                            rs.getString("gender"),
+                            rs.getDate("birthDate"),
+                            rs.getString("role"),
+                            rs.getString("status"),
+                            rs.getString("image"),
+                            rs.getTimestamp("create_at")
                     );
                 }
             }
+            return null;
         } finally {
             dbConnect.closeConnection();
         }
-        return null;
     }
 
     public boolean checkEmailExists(String email) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
-        String sql = "SELECT email FROM Users WHERE email = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            String sql = "SELECT email FROM Users WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
-            try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next();
-            }
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
         } finally {
             dbConnect.closeConnection();
         }
@@ -79,8 +86,9 @@ public class UserDAO {
     public void updatePassword(String email, String newPass) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
-        String sql = "UPDATE Users SET pass = ? WHERE email = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            String sql = "UPDATE Users SET pass = ? WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, newPass);
             stmt.setString(2, email);
             stmt.executeUpdate();
@@ -92,8 +100,9 @@ public class UserDAO {
     public void updateUser(User user) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
-        String sql = "UPDATE Users SET name = ?, email = ?, phone = ?, gender = ?, birthDate = ?, role = ?, status = ?, image = ? WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            String sql = "UPDATE Users SET name = ?, email = ?, phone = ?, gender = ?, birthDate = ?, role = ?, status = ?, image = ? WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPhone());
@@ -112,12 +121,13 @@ public class UserDAO {
     public User findByEmail(String email) throws SQLException {
         DBConnect dbConnect = new DBConnect();
         Connection conn = dbConnect.getConnection();
-        String sql = "SELECT * FROM Users WHERE email = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            String sql = "SELECT * FROM Users WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new User(
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new User(
                         rs.getInt("id"),
                         rs.getString("username"),
                         rs.getString("pass"),
@@ -130,12 +140,11 @@ public class UserDAO {
                         rs.getString("status"),
                         rs.getString("image"),
                         rs.getTimestamp("create_at")
-                    );
-                }
+                );
             }
+            return null;
         } finally {
             dbConnect.closeConnection();
         }
-        return null;
     }
 }

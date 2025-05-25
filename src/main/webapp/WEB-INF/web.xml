@@ -8,6 +8,22 @@
         <servlet-name>GitHubLoginServlet</servlet-name>
         <servlet-class>com.example.servlet.controller.GitHubLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateBlogsServerLet</servlet-name>
+        <servlet-class>com.example.servlet.controller.Nutritionist.CreateBlogsServerLet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateBlogsServerLet</servlet-name>
+        <servlet-class>com.example.servlet.controller.Nutritionist.UpdateBlogsServerLet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBlogsServerLet</servlet-name>
+        <servlet-class>com.example.servlet.controller.Nutritionist.DeleteBlogsServerLet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListBlogsServerLet</servlet-name>
+        <servlet-class>com.example.servlet.controller.Nutritionist.ListBlogsServerLet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GoogleLoginServlet</servlet-name>
         <url-pattern>/GoogleLoginServlet</url-pattern>
@@ -19,6 +35,22 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordController</servlet-name>
         <url-pattern>/ResetPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateBlogsServerLet</servlet-name>
+        <url-pattern>/createblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBlogsServerLet</servlet-name>
+        <url-pattern>/updateblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBlogsServerLet</servlet-name>
+        <url-pattern>/deleteblog</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListBlogsServerLet</servlet-name>
+        <url-pattern>/listblog</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
