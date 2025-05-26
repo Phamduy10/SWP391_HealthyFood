@@ -46,6 +46,8 @@ public class UserDAO {
                 // Kiểm tra mật khẩu bằng BCrypt123 = >abc   abc 
                 // register 123 => abc (DB)
                 // userName:admin
+                
+                
                 if (BCrypt.checkpw(password, hashedPassword)) {
                     return new User(
                             rs.getInt("id"),
