@@ -2,8 +2,8 @@ package com.example.servlet.controller;
 
 
 
-import com.example.servlet.dao.UserDAO;
-import com.example.servlet.model.User;
+import com.example.servlet.dao.AccountDAO;
+import com.example.servlet.model.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,11 +17,11 @@ import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
-    private UserDAO userDAO;
+    private AccountDAO userDAO;
 
     @Override
     public void init() {
-        userDAO = new UserDAO();
+        userDAO = new AccountDAO();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
 
         try {
-            User user = userDAO.loginUser(username, password);
+            Account user = userDAO.loginUser(username, password);
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);

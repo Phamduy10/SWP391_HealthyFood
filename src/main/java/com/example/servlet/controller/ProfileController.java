@@ -1,7 +1,7 @@
 package com.example.servlet.controller;
 
-import com.example.servlet.dao.UserDAO;
-import com.example.servlet.model.User;
+import com.example.servlet.dao.AccountDAO;
+import com.example.servlet.model.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,20 +20,20 @@ import java.sql.SQLException;
                  maxFileSize = 1024 * 1024 * 10,      // 10MB
                  maxRequestSize = 1024 * 1024 * 50)   // 50MB
 public class ProfileController extends HttpServlet {
-    private UserDAO userDAO;
+    private AccountDAO userDAO;
     private static final String UPLOAD_DIR = "C:\\Users\\Admin\\Desktop\\SWP391_HealthyFood\\src\\main\\webapp\\img\\avar";
     private static final String RELATIVE_PATH = "img/avar";
 
     @Override
     public void init() {
-        userDAO = new UserDAO();
+        userDAO = new AccountDAO();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        Account user = (Account) session.getAttribute("user");
 
         if (user == null) {
             response.sendRedirect("login.jsp");
@@ -56,7 +56,7 @@ public class ProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        Account user = (Account) session.getAttribute("user");
 
         if (user == null) {
             response.sendRedirect("login.jsp");

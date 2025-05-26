@@ -1,6 +1,6 @@
 package com.example.servlet.controller;
 
-import com.example.servlet.dao.UserDAO;
+import com.example.servlet.dao.AccountDAO;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class ForgotPasswordController extends HttpServlet {
 
     static final ConcurrentHashMap<String, String> verificationCodes = new ConcurrentHashMap<>();
-    private final UserDAO userDAO = new UserDAO();
+    private final AccountDAO userDAO = new AccountDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

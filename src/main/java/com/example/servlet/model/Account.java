@@ -3,7 +3,7 @@ package com.example.servlet.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class User {
+public class Account {
     private int id;
     private String username;
     private String pass;
@@ -17,9 +17,9 @@ public class User {
     private String image;
     private Timestamp create_at;
 
-    public User() {}
+    public Account() {}
 
-    public User(int id, String username, String pass, String name, String email, String phone, String gender, Date birthDate, String role, String status, String image, Timestamp create_at) {
+    public Account(int id, String username, String pass, String name, String email, String phone, String gender, Date birthDate, String role, String status, String image, Timestamp create_at) {
         this.id = id;
         this.username = username;
         this.pass = pass;

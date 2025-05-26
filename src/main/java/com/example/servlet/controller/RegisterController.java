@@ -2,8 +2,8 @@ package com.example.servlet.controller;
 
 
 
-import com.example.servlet.dao.UserDAO;
-import com.example.servlet.model.User;
+import com.example.servlet.dao.AccountDAO;
+import com.example.servlet.model.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,16 +12,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
    
-    private UserDAO userDAO;
+    private AccountDAO userDAO;
 
     @Override
     public void init() {
-        userDAO = new UserDAO();
+        userDAO = new AccountDAO();
     }
 
     @Override
@@ -35,7 +37,14 @@ public class RegisterController extends HttpServlet {
         String gender = request.getParameter("gender");
         String birthDateStr = request.getParameter("birthDate");
 
-        User user = new User();
+        try {
+            if(userDAO.checkEmailExists(email)){
+                    request.setAttribute("error", "This email existed!" );
+            request.getRequestDispatcher("register.jsp").forward(request, response);     
+            }
+        } catch (SQLException ex) {
+        }
+        Account user = new Account();
         user.setUsername(username);
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         user.setPass(hashedPassword);

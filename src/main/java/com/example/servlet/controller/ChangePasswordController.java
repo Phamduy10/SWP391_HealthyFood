@@ -1,7 +1,7 @@
 package com.example.servlet.controller;
 
-import com.example.servlet.dao.UserDAO;
-import com.example.servlet.model.User;
+import com.example.servlet.dao.AccountDAO;
+import com.example.servlet.model.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,18 +15,18 @@ import org.mindrot.jbcrypt.BCrypt;
 @WebServlet("/changePassword")
 public class ChangePasswordController extends HttpServlet {
 
-    private UserDAO userDAO;
+    private AccountDAO userDAO;
 
     @Override
     public void init() {
-        userDAO = new UserDAO();
+        userDAO = new AccountDAO();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        Account user = (Account) session.getAttribute("user");
 
         if (user == null) {
             response.sendRedirect("login.jsp");
@@ -39,7 +39,7 @@ public class ChangePasswordController extends HttpServlet {
 
         try {
             // Validate old password
-            User loggedInUser = userDAO.loginUser(user.getUsername(), oldPassword);
+            Account loggedInUser = userDAO.loginUser(user.getUsername(), oldPassword);
             if (loggedInUser == null) {
                 request.setAttribute("error", "Incorrect old password");
                 request.getRequestDispatcher("profile.jsp").forward(request, response);
