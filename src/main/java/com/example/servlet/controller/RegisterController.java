@@ -38,7 +38,7 @@ public class RegisterController extends HttpServlet {
         String birthDateStr = request.getParameter("birthDate");
 
         
-        //check existed
+        //check email existed
         try {
             if(userDAO.checkEmailExists(email)){
                     request.setAttribute("error", "This email existed!" );
