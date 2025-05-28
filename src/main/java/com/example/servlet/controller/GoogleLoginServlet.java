@@ -76,7 +76,8 @@ public class GoogleLoginServlet extends HttpServlet {
                 user.setUsername(userInfo.email);
                 user.setName(userInfo.name);
                 user.setEmail(userInfo.email);
-                user.setRole("USER_OAUTH");
+                user.setRole("USER_OAUTH2");
+                user.setPass("NoPassOauth2");
                 try {
                     userDAO.registerUser(user);
                 } catch (SQLException ex) {
