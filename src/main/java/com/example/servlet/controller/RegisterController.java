@@ -1,7 +1,10 @@
 package com.example.servlet.controller;
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> origin/Duy
 import com.example.servlet.dao.AccountDAO;
 import com.example.servlet.model.Account;
 import jakarta.servlet.ServletException;
@@ -18,7 +21,11 @@ import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
+<<<<<<< HEAD
+
+=======
    
+>>>>>>> origin/Duy
     private AccountDAO userDAO;
 
     @Override
@@ -27,22 +34,50 @@ public class RegisterController extends HttpServlet {
     }
 
     @Override
+<<<<<<< HEAD
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+    }
+
+    @Override
+=======
+>>>>>>> origin/Duy
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+<<<<<<< HEAD
+        String confirmPassword = request.getParameter("confirmPassword");
+        if (!password.equals(confirmPassword)) {
+            request.setAttribute("error", "Passwords do not match!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+        
+        
+=======
+>>>>>>> origin/Duy
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String gender = request.getParameter("gender");
         String birthDateStr = request.getParameter("birthDate");
 
+<<<<<<< HEAD
+        //check email existed
+        try {
+            if (userDAO.checkEmailExists(email)) {
+                request.setAttribute("error", "This email existed!");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+=======
         
         //check email existed
         try {
             if(userDAO.checkEmailExists(email)){
                     request.setAttribute("error", "This email existed!" );
             request.getRequestDispatcher("register.jsp").forward(request, response);     
+>>>>>>> origin/Duy
             }
         } catch (SQLException ex) {
         }
@@ -65,4 +100,8 @@ public class RegisterController extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/Duy
